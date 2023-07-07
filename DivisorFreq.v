@@ -1,17 +1,20 @@
-module 
-DivisorFreq
-#(parameter freq = 12500000)
+module DivisorFreq
 (
-	input wire clk, reset,
+	input wire clk, reset, setFreq,
 	output reg reg1Hz,
 	input wire halt
 );
+
 initial begin
 	reg1Hz <= 1;
+	if(setFreq)	freq <= 0;
+	else freq <= 25000000;
 end
-integer count;
 
-always @(negedge clk )  begin
+integer count = 0;
+integer freq;
+
+always @(negedge clk)  begin	
 	if(halt) begin
 		reg1Hz<= 0;
 	end

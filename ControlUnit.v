@@ -149,7 +149,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			Branch <= 0;
 			memtoReg <= 2'b00;
 			ALUSrc <= 0;
-			regWrite <= 0;
+			regWrite <= 1;
 			memWrite <= 0;
 			memRead <= 0;
 			Alu_op <= 3'b000;
