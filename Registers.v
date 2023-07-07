@@ -9,7 +9,7 @@ module Registers(ReadReg1,ReadReg2,WriteReg,WriteData,ReadData1,ReadData2,RegWri
 	reg [31:0] Register[31:0];
 	assign	ReadData1 = Register[ReadReg1];
 	assign	ReadData2 = Register[ReadReg2];
-	always@(posedge CLK)
+	always@(negedge CLK)
 	begin
 		if(RegWrite) Register[WriteReg] <= WriteData;
 	end

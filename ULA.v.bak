@@ -79,6 +79,7 @@ module ULA
 		end
 		else
 			result <= 0;
+			
 	end
 	assign zero = (result == 1)? 1:0;
 endmodule

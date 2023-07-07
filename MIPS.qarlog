@@ -1,0 +1,36 @@
+Quartus Prime Archive log --	C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/MIPS.qarlog
+
+Archive:	C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/MIPS.qar
+Date:		Fri Jul 07 10:06:50 2023
+Quartus Prime		20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+	=========== Files Selected: ===========
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/ALUControl.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/Add.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/ControlUnit.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/DivisorFreq.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/IO.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/MIPS.qpf
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/MIPS.qsf
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/MUX32.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/MUX332.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/MUX5.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/PC.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/PC_4.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/Processor.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/RAM.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/ROM.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/Registers.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/ShiftLeft2_26.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/ShiftLeft2_32.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/ULA.v
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/Waveform.vwf
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/Waveform2.vwf
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/Waveform3.vwf
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/assignment_defaults.qdf
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/rom.txt
+C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/sign_extend.v
+	======= Total: 25 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

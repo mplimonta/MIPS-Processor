@@ -1,16 +1,16 @@
 module RAM
 (
 	input [31:0] data,
-	input [31:0] addr,
+	input [9:0] addr,
 	input mW, mR,clk,
 	output [31:0] DataOut
 );
-	reg [31:0] ram[31:0];
-	always @ (posedge clk)
+	reg [31:0] ram[9:0];
+	always @ (negedge clk)
 	begin
 		if (mW)
-			ram[addr[6:2]] <= data;
+			ram[addr] <= data;
 	end 
-	assign DataOut = ram[addr[6:2]];
+	assign DataOut = ram[addr];
 
 endmodule
