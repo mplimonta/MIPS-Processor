@@ -38,7 +38,7 @@ module Processor
 	
 	DivisorFreq DF(CLK, reset, setFreq, Clock, halt);
 	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite, memWrite, memRead, ALU_Op, halt, output_flag, input_flag);
-	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, addressOut,linha);
+	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, addressOut);
 	PC_4 pc4(addressOut, addressOut_ADD);
 	ROM rom(addressOut[11:2], Clock, instruction);
 	MUX432 #(5) mx332(instruction[20:16], instruction[15:11], 5'b11111, 5'b11100, RegisterDST, writeRegister);
