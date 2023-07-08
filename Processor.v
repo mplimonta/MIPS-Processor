@@ -47,7 +47,7 @@ module Processor
 	MUX32 mux32(ReadData2, sign32, ALUSrc, ALU_in);
 	ALUControl ulacontrol(ALU_Op, instruction[5:0], ALU_Control);
 	ULA alu(ALU_Control, ReadData1, ALU_in, zero, ALU_Out);
-	RAM ram(ReadData2, ALU_Out, memWrite, memRead, Clock, Read_Data_Out);
+	RAM ram(ReadData2, ALU_Out[9:0], memWrite, memRead, Clock, Read_Data_Out);
 	MUX432 mutiplex332_1(ALU_Out, Read_Data_Out, addressOut_ADD, user_input, memtoReg, writeData);
 	MUX32 mux323(writeData, user_input, input_flag, data);
 	ShiftLeft2_32 SL32(sign32, sign_Out);
