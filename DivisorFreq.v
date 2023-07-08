@@ -8,7 +8,7 @@ module DivisorFreq
 initial begin
 	reg1Hz <= 1;
 	if(setFreq)	freq <= 0;
-	else freq <= 25000000;
+	else freq <= 2500000;
 end
 
 integer count = 0;

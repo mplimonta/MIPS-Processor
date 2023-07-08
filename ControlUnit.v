@@ -144,10 +144,10 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 		end
 		else if (Opcode == 6'b001100)		//Input
 		begin
-			RegisterDST <= 2'b00;
+			RegisterDST <= 2'b11;
 			Jump <= 2'b00;
 			Branch <= 0;
-			memtoReg <= 2'b00;
+			memtoReg <= 2'b11;
 			ALUSrc <= 0;
 			regWrite <= 1;
 			memWrite <= 0;

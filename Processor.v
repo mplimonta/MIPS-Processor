@@ -1,7 +1,7 @@
 module Processor
 (
 	input CLK, reset, insert, setFreq,
-	input [3:0] SW,
+	input [17:0] SW,
 	output [6:0]HEX0,
 	output [6:0]HEX1,
 	output [6:0]HEX2,
@@ -41,15 +41,14 @@ module Processor
 	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, addressOut,linha);
 	PC_4 pc4(addressOut, addressOut_ADD);
 	ROM rom(addressOut[11:2], Clock, instruction);
-	MUX332 #(5) mx332(instruction[20:16], instruction[15:11], 5'b11111, RegisterDST, writeRegister);
-	MUX32 mux322(writeRegister, instruction[20:16], input_flag, writeInput);
-	Registers regs(instruction[25:21], instruction[20:16], writeInput, data, ReadData1, ReadData2, regWrite, Clock);
+	MUX432 #(5) mx332(instruction[20:16], instruction[15:11], 5'b11111, 5'b11100, RegisterDST, writeRegister);
+	Registers regs(instruction[25:21], instruction[20:16], writeRegister, writeData, ReadData1, ReadData2, regWrite, Clock);
 	sign_extend Se(instruction[15:0], sign32);
 	MUX32 mux32(ReadData2, sign32, ALUSrc, ALU_in);
 	ALUControl ulacontrol(ALU_Op, instruction[5:0], ALU_Control);
 	ULA alu(ALU_Control, ReadData1, ALU_in, zero, ALU_Out);
 	RAM ram(ReadData2, ALU_Out, memWrite, memRead, Clock, Read_Data_Out);
-	MUX332 mutiplex332_1(ALU_Out, Read_Data_Out, addressOut_ADD, memtoReg, writeData);
+	MUX432 mutiplex332_1(ALU_Out, Read_Data_Out, addressOut_ADD, user_input, memtoReg, writeData);
 	MUX32 mux323(writeData, user_input, input_flag, data);
 	ShiftLeft2_32 SL32(sign32, sign_Out);
 	Add adder(addressOut_ADD, sign_Out, ALU_Add_Out);

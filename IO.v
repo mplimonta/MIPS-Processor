@@ -42,7 +42,7 @@ end
 	endcase
   endtask
   
-  always @ (posedge clk or posedge reset or posedge halt)
+  always @ (posedge clk or posedge reset/* or posedge halt*/)
   begin
 	if(reset) 
 	begin
@@ -55,17 +55,17 @@ end
 		HEX6 <= 7'b1111111;
 		HEX7 <= 7'b1111111;
 	end
-	else if(halt)
-	begin
-		HEX0 <= 7'b1111111;
-		HEX1 <= 7'b1111111;
-		HEX2 <= 7'b1111111;
-		HEX3 <= 7'b1111111;
-		HEX4 <= 7'b1111111;
-		HEX5 <= 7'b1111111;
-		HEX6 <= 7'b1111111;
-		HEX7 <= 7'b1111111;
-	end
+//	else if(halt)
+//	begin
+//		HEX0 <= 7'b1111111;
+//		HEX1 <= 7'b1111111;
+//		HEX2 <= 7'b1111111;
+//		HEX3 <= 7'b1111111;
+//		HEX4 <= 7'b1111111;
+//		HEX5 <= 7'b1111111;
+//		HEX6 <= 7'b1111111;
+//		HEX7 <= 7'b1111111;
+//	end
 	else if(output_flag && !input_flag)
 	begin		  
 		set_7seg(num%10, HEX0);
@@ -101,7 +101,7 @@ end
 			set_7seg((user_input%10000000)/1000000, HEX6);
 			set_7seg((user_input%100000000)/10000000, HEX7);
 		end
-	end
+	end/*
 	else
 	begin
 			HEX0 <= 7'b1000000;
@@ -112,7 +112,7 @@ end
 			HEX5 <= 7'b1000000;
 			HEX6 <= 7'b1000000;
 			HEX7 <= 7'b1000000;
-	end
+	end*/
   end
   
   assign user_input = {SW[3],SW[2],SW[1],SW[0]};
