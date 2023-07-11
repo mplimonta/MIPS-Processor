@@ -1,5 +1,5 @@
 Archive Project report for MIPS
-Fri Jul 07 10:06:51 2023
+Mon Jul 10 21:35:39 2023
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -36,7 +36,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------+
 ; Archive Project Summary                                        ;
 +------------------------+---------------------------------------+
-; Archive Project Status ; Successful - Fri Jul 07 10:06:51 2023 ;
+; Archive Project Status ; Successful - Mon Jul 10 21:35:39 2023 ;
 ; Revision Name          ; MIPS                                  ;
 ; Top-level Entity Name  ; Processor                             ;
 ; Family                 ; Cyclone IV E                          ;
@@ -51,51 +51,52 @@ Info: File Set 'Source control' contains:
     Info: Automatically detected source files
 Warning: Hierarchical Platform Designer systems and custom IP components(_hw.tcl and associated files) are not archived by the Quartus Archiver
 Info: Archive will store files relative to the closest common parent directory
-Info (13213): Using common directory C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/
+Info (13213): Using common directory C:/Users/mathe/Desktop/
 Info: ----------------------------------------------------------
 Info: ----------------------------------------------------------
-Info: Generated archive 'C:/Users/mathe/Desktop/MIPS-Processor/MIPS_restored/MIPS.qar'
+Info: Generated archive 'C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/MIPS.qar'
 Info: ----------------------------------------------------------
 Info: ----------------------------------------------------------
 Info: Generated report 'MIPS.archive.rpt'
 Info (23030): Evaluation of Tcl script e:/quartus/common/tcl/apps/qpm/qar.tcl was successful
-Info: Quartus Prime Shell was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4829 megabytes
-    Info: Processing ended: Fri Jul 07 10:06:51 2023
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:02
+Info: Quartus Prime Shell was successful. 0 errors, 12 warnings
+    Info: Peak virtual memory: 4817 megabytes
+    Info: Processing ended: Mon Jul 10 21:35:39 2023
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:25
 
 
-+-------------------------+
-; Files Archived          ;
-+-------------------------+
-; File Name               ;
-+-------------------------+
-; Add.v                   ;
-; ALUControl.v            ;
-; assignment_defaults.qdf ;
-; ControlUnit.v           ;
-; DivisorFreq.v           ;
-; IO.v                    ;
-; MIPS.qpf                ;
-; MIPS.qsf                ;
-; MUX5.v                  ;
-; MUX32.v                 ;
-; MUX332.v                ;
-; PC.v                    ;
-; PC_4.v                  ;
-; Processor.v             ;
-; RAM.v                   ;
-; Registers.v             ;
-; rom.txt                 ;
-; ROM.v                   ;
-; ShiftLeft2_26.v         ;
-; ShiftLeft2_32.v         ;
-; sign_extend.v           ;
-; ULA.v                   ;
-; Waveform.vwf            ;
-; Waveform2.vwf           ;
-; Waveform3.vwf           ;
-+-------------------------+
++-----------------------------------+
+; Files Archived                    ;
++-----------------------------------+
+; File Name                         ;
++-----------------------------------+
+; ../../Chain1.cdf                  ;
+; Add.v                             ;
+; ALUControl.v                      ;
+; assignment_defaults.qdf           ;
+; C:/Users/mathe/Desktop/Chain1.cdf ;
+; ControlUnit.v                     ;
+; DivisorFreq.v                     ;
+; IO.v                              ;
+; MIPS.qpf                          ;
+; MIPS.qsf                          ;
+; MUX5.v                            ;
+; MUX32.v                           ;
+; MUX332.v                          ;
+; MUX432.v                          ;
+; PC.v                              ;
+; PC_4.v                            ;
+; Processor.v                       ;
+; RAM.v                             ;
+; Registers.v                       ;
+; rom.txt                           ;
+; ROM.v                             ;
+; ShiftLeft2_26.v                   ;
+; ShiftLeft2_32.v                   ;
+; sign_extend.v                     ;
+; ULA.v                             ;
+; Waveform.vwf                      ;
++-----------------------------------+
 
 

@@ -115,7 +115,7 @@ end
 	end
   end
   
-  assign user_input = {SW[3],SW[2],SW[1],SW[0]};
+  assign user_input = {28'd0,SW[3],SW[2],SW[1],SW[0]};
   
   
 endmodule
