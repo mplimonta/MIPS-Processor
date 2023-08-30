@@ -2,7 +2,7 @@ module IO (
 	input clk, reset, halt,
 	input [31:0] num,
 	input output_flag, input_flag,
-	input [3:0] SW,
+	input [17:0] SW,
 	output [31:0] user_input,
 	output reg [6:0] HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,HEX6,HEX7
 );

@@ -20,7 +20,7 @@ module Processor
 	output [31:0] ReadData2,
 	output [3:0] ALU_Control,
 	output [2:0] ALU_Op,
-	output zero, MUX32, halt, output_flag, input_flag, 
+	output zero, BranchOut, halt, output_flag, input_flag, 
 	output [31:0] ALU_Out,
 	output [31:0] Read_Data_Out,
 	output [31:0] ALU_Add_Out,
@@ -49,11 +49,10 @@ module Processor
 	ULA alu(ALU_Control, ReadData1, ALU_in, zero, ALU_Out);
 	RAM ram(ReadData2, ALU_Out[9:0], memWrite, memRead, Clock, Read_Data_Out);
 	MUX432 mutiplex332_1(ALU_Out, Read_Data_Out, addressOut_ADD, user_input, memtoReg, writeData);
-	MUX32 mux323(writeData, user_input, input_flag, data);
 	ShiftLeft2_32 SL32(sign32, sign_Out);
 	Add adder(addressOut_ADD, sign_Out, ALU_Add_Out);
-	and(MUX32, Branch, zero);
-	MUX32 multiplex32(addressOut_ADD, ALU_Add_Out, MUX32, Branch_Normal);
+	and(BranchOut, Branch, zero);
+	MUX32 multiplex32(addressOut_ADD, ALU_Add_Out, BranchOut, Branch_Normal);
 	ShiftLeft2_26 SL26(instruction[25:0], addressOut_ADD[31:28], shift26_Out);
 	MUX332 mutiplex332_2(Branch_Normal, shift26_Out, ReadData1, Jump, addressIn);
 	IO InputOutput(Clock, reset, halt, ReadData1, output_flag, input_flag, SW, user_input, HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,HEX6,HEX7);
