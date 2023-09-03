@@ -80,6 +80,6 @@ module ULA
 		else
 			result <= 0;
 	end
-	assign zero = (result == 1)? 1:0;
+	assign zero = (result == 0);
 endmodule
 

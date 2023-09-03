@@ -7,7 +7,7 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn,addressOut);
 	always@(posedge CLK or posedge reset)
 	begin
 		if (reset) addressOut <= 0;
-		else if((!input_flag && !output_flag) || insert)begin
+		else if(!input_flag && !output_flag)begin
 			addressOut <= addressIn;
 		end
 		else if (insert && (counter < 5)) counter <= counter + 1;

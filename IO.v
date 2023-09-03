@@ -2,21 +2,21 @@ module IO (
 	input clk, reset, halt,
 	input [31:0] num,
 	input output_flag, input_flag,
-	input [17:0] SW,
+	input [15:0] SW,
 	output [31:0] user_input,
-	output reg [6:0] HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,HEX6,HEX7
+	output reg [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7
 );
 
-initial begin
-	HEX0 = 7'b1111111;
-	HEX1 = 7'b1111111;
-	HEX2 = 7'b1111111;
-	HEX3 = 7'b1111111;
-	HEX4 = 7'b1111111;
-	HEX5 = 7'b1111111;
-	HEX6 = 7'b1111111;
-	HEX7 = 7'b1111111;
-end
+//initial begin
+//	HEX0 = 7'b1111111;
+//	HEX1 = 7'b1111111;
+//	HEX2 = 7'b1111111;
+//	HEX3 = 7'b1111111;
+//	HEX4 = 7'b1111111;
+//	HEX5 = 7'b1111111;
+//	HEX6 = 7'b1111111;
+//	HEX7 = 7'b1111111;
+//end
 
   task set_7seg;
 	input [3:0] numero;
@@ -42,7 +42,7 @@ end
 	endcase
   endtask
   
-  always @ (posedge clk or posedge reset/* or posedge halt*/)
+  always @ (posedge clk or posedge reset or posedge halt)
   begin
 	if(reset) 
 	begin
@@ -57,14 +57,14 @@ end
 	end
 	else if(halt)
 	begin
-		HEX0 <= 7'b1111111;
-		HEX1 <= 7'b1111111;
-		HEX2 <= 7'b1111111;
-		HEX3 <= 7'b1111111;
-		HEX4 <= 7'b1111111;
-		HEX5 <= 7'b1111111;
-		HEX6 <= 7'b1111111;
-		HEX7 <= 7'b1111111;
+		HEX0 <= 7'b1001110; //T
+		HEX1 <= 7'b1000111; //A
+		HEX2 <= 7'b0001000; //L
+		HEX3 <= 7'b0001001; //H
+		HEX4 <= 7'b0010000; //-
+		HEX5 <= 7'b0010000; //-
+		HEX6 <= 7'b0010000; //-
+		HEX7 <= 7'b0010000; //-
 	end
 	else if(output_flag && !input_flag)
 	begin		  
@@ -104,18 +104,17 @@ end
 	end
 	else
 	begin
-			HEX0 <= 7'b1000000;
-			HEX1 <= 7'b1000000;
-			HEX2 <= 7'b1000000;
-			HEX3 <= 7'b1000000;
-			HEX4 <= 7'b1000000;
-			HEX5 <= 7'b1000000;
-			HEX6 <= 7'b1000000;
-			HEX7 <= 7'b1000000;
+			HEX0 <= 7'b0010000;
+			HEX1 <= 7'b0101011;
+			HEX2 <= 7'b1100011;
+			HEX3 <= 7'b0101111;
+			HEX4 <= 7'b0010000;
+			HEX5 <= 7'b0010000;
+			HEX6 <= 7'b0010000;
+			HEX7 <= 7'b0010000;
 	end
   end
   
   assign user_input = {28'd0,SW[3],SW[2],SW[1],SW[0]};
-  
-  
+
 endmodule
