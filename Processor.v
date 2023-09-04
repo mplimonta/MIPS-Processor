@@ -1,7 +1,7 @@
 module Processor
 (
 	input CLK, reset, insert, setFreq,
-	input [15:0] SW,
+	input [14:0] SW,
 	output [6:0] HEX0,
 	output [6:0] HEX1,
 	output [6:0] HEX2,
@@ -34,7 +34,6 @@ module Processor
 	wire [31:0] sign_Out;
 	wire [31:0] shift26_Out;
 	wire [4:0] writeRegister;
-	
 	
 	DivisorFreq DF(CLK, reset, setFreq, Clock, halt);
 	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, addressOut);

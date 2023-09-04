@@ -2,11 +2,12 @@ module IO (
 	input clk, reset, halt,
 	input [31:0] num,
 	input output_flag, input_flag,
-	input [15:0] SW,
+	input [14:0] SW,
 	output [31:0] user_input,
 	output reg [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7
 );
-
+integer loading = 0;
+integer state = 7'b1110111;
 //initial begin
 //	HEX0 = 7'b1111111;
 //	HEX1 = 7'b1111111;
@@ -44,6 +45,7 @@ module IO (
   
   always @ (posedge clk or posedge reset or posedge halt)
   begin
+  
 	if(reset) 
 	begin
 		HEX0 <= 7'b1111111;
@@ -102,17 +104,52 @@ module IO (
 			set_7seg((user_input%100000000)/10000000, HEX7);
 		end
 	end
-//	else
-//	begin
-//			HEX0 <= 7'b0010000;
-//			HEX1 <= 7'b0101011;
-//			HEX2 <= 7'b1100011;
-//			HEX3 <= 7'b0101111;
-//			HEX4 <= 7'b0010000;
-//			HEX5 <= 7'b0010000;
-//			HEX6 <= 7'b0010000;
-//			HEX7 <= 7'b0010000;
-//	end
+	else
+	begin
+			HEX0 <= 7'b0101011;
+			HEX1 <= 7'b1100011;
+			HEX2 <= 7'b0101111;
+			HEX3 <= state;
+			HEX4 <= state;
+			HEX5 <= state;
+			HEX6 <= state;
+			HEX7 <= state;
+			loading <= loading + 1;
+			if(loading == 0) begin
+				state <= 7'b1110111;
+			end
+			else
+			begin
+			if(loading == 1) begin
+				state <= 7'b1101111;
+			end
+			else
+			begin
+			if(loading == 2) begin
+				state <= 7'b1011111;
+			end
+			else
+			begin
+			if(loading == 3) begin
+				state <= 7'b1111110;
+			end
+			else
+			begin
+			if(loading == 4) begin
+				state <= 7'b1111101;
+			end
+			else
+			begin
+			if(loading == 5) begin
+				state <= 7'b1111011;
+				loading <= 0;
+			end
+			end
+			end
+			end
+			end
+			end
+	end
   end
   
   assign user_input = {22'b0,SW};
