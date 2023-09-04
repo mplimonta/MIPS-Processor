@@ -23,7 +23,7 @@ always @(negedge clk)  begin
 		reg1Hz <= 0;
 	end
 	else if (!halt || !reg1Hz)begin
-		if (count == freq) begin
+		if (count == 5) begin
 			count <= 0;
 			reg1Hz <= ~reg1Hz;
 		end

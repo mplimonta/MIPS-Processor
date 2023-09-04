@@ -80,7 +80,7 @@ module IO (
 	else if(!output_flag && input_flag)
 	begin
 		if (!user_input)
-		begin			
+		begin
 			HEX0 <= 7'b0111111;
 			HEX1 <= 7'b0111111;
 			HEX2 <= 7'b0111111;
@@ -102,19 +102,19 @@ module IO (
 			set_7seg((user_input%100000000)/10000000, HEX7);
 		end
 	end
-	else
-	begin
-			HEX0 <= 7'b0010000;
-			HEX1 <= 7'b0101011;
-			HEX2 <= 7'b1100011;
-			HEX3 <= 7'b0101111;
-			HEX4 <= 7'b0010000;
-			HEX5 <= 7'b0010000;
-			HEX6 <= 7'b0010000;
-			HEX7 <= 7'b0010000;
-	end
+//	else
+//	begin
+//			HEX0 <= 7'b0010000;
+//			HEX1 <= 7'b0101011;
+//			HEX2 <= 7'b1100011;
+//			HEX3 <= 7'b0101111;
+//			HEX4 <= 7'b0010000;
+//			HEX5 <= 7'b0010000;
+//			HEX6 <= 7'b0010000;
+//			HEX7 <= 7'b0010000;
+//	end
   end
   
-  assign user_input = {28'd0,SW[3],SW[2],SW[1],SW[0]};
+  assign user_input = {22'b0,SW};
 
 endmodule
