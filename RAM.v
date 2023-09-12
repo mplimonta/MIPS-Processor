@@ -5,7 +5,7 @@ module RAM
 	input mW, mR,clk,
 	output [31:0] DataOut
 );
-	reg [31:0] ram[1023:0];
+	reg [31:0] ram[127:0];
 	
 	always @ (negedge clk)
 	begin
