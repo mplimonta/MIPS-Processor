@@ -14,3 +14,4 @@ module Registers(ReadReg1,ReadReg2,WriteReg,WriteData,ReadData1,ReadData2,RegWri
 		if(RegWrite) Register[WriteReg] <= WriteData;
 	end
 endmodule
+

@@ -25,7 +25,9 @@ module Processor
 	output [31:0] ALU_Add_Out,
 	output [1:0] Jump, RegisterDST, memtoReg,
 	output Branch,regWrite,memWrite,memRead,
-	output ALUSrc
+	output ALUSrc,
+	output ContextChange
+	
 );	
 	wire [31:0] Branch_Normal;
 	wire [31:0] addressOut_ADD;
@@ -37,8 +39,9 @@ module Processor
 	
 	DivisorFreq DF(CLK, reset, setFreq, Clock, halt);
 	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, addressOut);
+	//Timer();
 	PC_4 pc4(addressOut, addressOut_ADD);
-	ROM rom(addressOut[11:2], Clock, instruction);
+	ROM rom(addressOut[11:2], instruction);
 	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite, memWrite, memRead, ALU_Op, halt, output_flag, input_flag);
 	MUX432 #(5) mx332(instruction[20:16], instruction[15:11], 5'b11111, 5'b11100, RegisterDST, writeRegister);
 	Registers regs(instruction[25:21], instruction[20:16], writeRegister, writeData, ReadData1, ReadData2, regWrite, Clock);

@@ -14,3 +14,4 @@ module RAM
 	assign DataOut = ram[addr];
 
 endmodule
+

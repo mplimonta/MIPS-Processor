@@ -4,3 +4,4 @@ module MUX5(a,b,Condition,Out);
 	output [4:0]Out;
 	assign Out = (Condition==0) ? a:b;
 endmodule
+

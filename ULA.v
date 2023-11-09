@@ -5,7 +5,6 @@ module ULA
 	input [31:0] inB,
 	output zero,
 	output reg [31:0] result
-	
 );
 
 	always@(inA,inB,ALU_Control)

@@ -6,3 +6,4 @@ module MUX332
 	output [addrsize-1:0]Out;
 	assign Out = (Condition == 0) ? a:(Condition == 1)? b:c;
 endmodule
+

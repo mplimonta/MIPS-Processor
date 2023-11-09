@@ -6,3 +6,4 @@ module MUX432
 	output [addrsize-1:0]Out;
 	assign Out = (Condition == 2'b00) ? a:(Condition == 2'b01)? b: (Condition == 2'b10)? c:d;
 endmodule
+

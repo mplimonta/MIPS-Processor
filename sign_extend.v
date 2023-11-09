@@ -12,3 +12,4 @@ module sign_extend(in,out);
 		out[15:0] = in[15:0];
 	end
 endmodule
+
