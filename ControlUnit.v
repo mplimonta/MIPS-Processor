@@ -1,9 +1,12 @@
-module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWrite,memRead,Alu_op,halt, output_flag, input_flag);
+module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWrite,Alu_op,halt, output_flag, input_flag, Save,Load);
 	input [5:0] Opcode;
 	output reg halt, output_flag, input_flag;
-	output reg [1:0] Jump, RegisterDST, memtoReg;
-	output reg Branch,ALUSrc,regWrite,memWrite,memRead;
+	output reg [1:0] Jump;
+	output reg [1:0] RegisterDST;
+	output reg [1:0] memtoReg;
+	output reg Branch,ALUSrc,regWrite,memWrite;
 	output reg [2:0] Alu_op;
+	output reg Save,Load;
 	always@(*) 
 	begin
 		if(Opcode == 6'b000000)				//Instrução tipo R
@@ -14,12 +17,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b1;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b100;
 			halt <= 1'b0;
 			output_flag <= 1'b0;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 		else if (Opcode == 6'b000001)		//Instrução tipo I : lw
 		begin
@@ -29,12 +33,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b01;
 			ALUSrc <= 1'b1;
 			regWrite <= 1'b1;
-			memWrite <= 1'b0;
-			memRead <= 1'b1;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b000;
 			halt <= 1'b0;
 			output_flag <= 1'b0;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 		else if (Opcode == 6'b000010)		//Instrução tipo I : sw
 		begin
@@ -44,12 +49,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b1;
 			regWrite <= 1'b0;
-			memWrite <= 1'b1;
-			memRead <= 1'b0;
+			memWrite <= 1'b1; 
 			Alu_op <= 3'b000;
 			halt <= 1'b0;
 			output_flag <= 1'b0;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 		else if (Opcode == 6'b000011)		//Instrução tipo I : addi
 		begin
@@ -59,12 +65,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b1;
 			regWrite <= 1'b1;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b000;
 			halt <= 1'b0;
 			output_flag <= 1'b0;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 		else if (Opcode == 6'b000100)		//Instrução tipo I : subi
 		begin
@@ -74,12 +81,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b1;
 			regWrite <= 1'b1;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b001;
 			halt <= 1'b0;
 			output_flag <= 1'b0;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 		else if (Opcode == 6'b000101)		//Instrução tipo I : beq
 		begin
@@ -89,12 +97,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b011;
 			halt <= 1'b0;
 			output_flag <= 1'b0;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 
 		else if (Opcode == 6'b001001)		//Instrução tipo J : j
@@ -105,12 +114,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b000;
 			halt <= 1'b0;
 			output_flag <= 1'b0;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 		else if (Opcode == 6'b001010)		//Instrução tipo J : jr
 		begin
@@ -120,12 +130,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b000;
 			halt <= 1'b0;
 			output_flag <= 1'b0;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 		else if (Opcode == 6'b001011)		//Instrução tipo J : jal
 		begin
@@ -135,12 +146,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b10;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b1;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b000;
 			halt <= 1'b0;
 			output_flag <= 1'b0;	
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 		else if (Opcode == 6'b001100)		//Input
 		begin
@@ -150,12 +162,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b11;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b1;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b000;
 			halt <= 1'b0;
 			output_flag <= 1'b0;
 			input_flag <= 1'b1;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 		else if (Opcode == 6'b001101)		//Output
 		begin
@@ -165,12 +178,45 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b000;
 			halt <= 1'b0;
 			output_flag <= 1'b1;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
+		end
+		else if (Opcode == 6'b001110)		//save
+		begin
+			RegisterDST <= 2'b00;
+			Jump <= 2'b00;
+			Branch <= 1'b0;
+			memtoReg <= 2'b00;
+			ALUSrc <= 1'b0;
+			regWrite <= 1'b0;
+			memWrite <= 1'b1; 
+			Alu_op <= 3'b000;
+			halt <= 1'b0;
+			output_flag <= 1'b0;
+			input_flag <= 1'b0;
+			Save <= 1'b1;
+			Load <= 1'b0;
+		end
+		else if (Opcode == 6'b001111)		//load
+		begin
+			RegisterDST <= 2'b00;
+			Jump <= 2'b00;
+			Branch <= 1'b0;
+			memtoReg <= 2'b00;
+			ALUSrc <= 1'b0;
+			regWrite <= 1'b1;
+			memWrite <= 1'b0; 
+			Alu_op <= 3'b000;
+			halt <= 1'b0;
+			output_flag <= 1'b0;
+			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b1;
 		end
 		else if (Opcode == 6'b111111)		//HALT
 		begin
@@ -180,12 +226,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b000;
 			halt <= 1'b1;
 			output_flag <= 1'b0;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 		else 										//default
 		begin
@@ -195,12 +242,13 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
-			memWrite <= 1'b0;
-			memRead <= 1'b0;
+			memWrite <= 1'b0; 
 			Alu_op <= 3'b000;
 			halt <= 1'b0;
 			output_flag <= 1'b0;
 			input_flag <= 1'b0;
+			Save <= 1'b0;
+			Load <= 1'b0;
 		end
 	end
 endmodule
