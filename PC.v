@@ -5,8 +5,9 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addres
 	output reg [31:0] addressOut;
 	output reg ContextChangeBack;
 	
+	integer lastinsert = 0;
 	integer instcount = 0;
-	integer counter = 0;
+	
 	always@(posedge CLK or posedge reset)
 	begin
 		if (reset) begin
@@ -27,11 +28,10 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addres
 				end
 			end
 		end
-		else if (insert && (counter < 5)) counter <= counter + 1;
-		else if(insert)begin
-			counter <= 0;
+		else if(insert != lastinsert)begin
 			addressOut <= addressIn;
 			instcount <= instcount + 1;
+			lastinsert <= insert;
 		end
 	end
 endmodule
