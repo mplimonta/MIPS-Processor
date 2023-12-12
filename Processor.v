@@ -28,7 +28,7 @@ module Processor
 	output ALUSrc,
 	output ContextChangeTo, ContextChangeBack, 
 	output inProgram,
-	output NextLineTBE,OffsetChange,
+	output NextLineTBE,OffsetChange, changeROM,
 	output [11:0] inRAMOffset
 	//output [3:0] instcount
 );	
@@ -44,7 +44,7 @@ module Processor
 	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, inProgram, addressOut, ContextChangeBack,NextLineTBE,savedLine);
 	PC_4 pc4(addressOut, addressOut_ADD);
 	single_port_rom rom(addressOut[13:2], instruction);
-	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite, memWrite, ALU_Op, halt, output_flag, input_flag,NextLineTBE, OffsetChange);
+	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite, memWrite, ALU_Op, halt, output_flag, input_flag,NextLineTBE, OffsetChange, changeROM);
 	MUX432 #(5) mx332(instruction[20:16], instruction[15:11], 5'b11111, 5'b11100, RegisterDST, writeRegister);
 	Registers regs(instruction[25:21], instruction[20:16], writeRegister, writeData, ReadData1, ReadData2, regWrite, Clock);
 	sign_extend Se(instruction[15:0], sign32);
