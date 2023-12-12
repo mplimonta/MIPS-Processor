@@ -1,7 +1,7 @@
 module ROM(addr,q);
-	input [9:0] addr;
+	input [11:0] addr;
 	output reg [31:0] q;
-	reg [31:0] rom[127:0];//1023
+	reg [31:0] rom[1407:0];//1408
 	initial
 	begin
 		$readmemb("rom.txt", rom);

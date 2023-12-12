@@ -16,11 +16,11 @@ module Processor
 	output [31:0] instruction,
 	output [31:0] writeData, user_input,
 	output [31:0] ReadData1,
-	output [31:0] ReadData2,
+	output [31:0] ReadData2, data,
 	output [3:0] ALU_Control,
 	output [2:0] ALU_Op,
 	output zero, BranchOut, halt, output_flag, input_flag, 
-	output [31:0] ALU_Out,
+	output [31:0] ALU_Out,savedLine,
 	output [31:0] Read_Data_Out,
 	output [31:0] ALU_Add_Out,
 	output [1:0] Jump, RegisterDST, memtoReg,
@@ -28,7 +28,8 @@ module Processor
 	output ALUSrc,
 	output ContextChangeTo, ContextChangeBack, 
 	output inProgram,
-	output Save, Load
+	output NextLineTBE,
+	output [11:0] ProcessOffset
 	//output [3:0] instcount
 	
 );	
@@ -41,17 +42,21 @@ module Processor
 	wire [4:0] writeRegister;
 	
 	DivisorFreq DF(CLK, reset, setFreq, Clock, halt);
-	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, inProgram, addressOut, ContextChangeBack);
+	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, inProgram, addressOut, ContextChangeBack,NextLineTBE,savedLine);
 	PC_4 pc4(addressOut, addressOut_ADD);
-	single_port_rom rom(addressOut[11:2], instruction);
-	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite, memWrite, ALU_Op, halt, output_flag, input_flag, Save, Load);
+	single_port_rom rom(addressOut[13:2], instruction);
+	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite, memWrite, ALU_Op, halt, output_flag, input_flag,NextLineTBE);
 	MUX432 #(5) mx332(instruction[20:16], instruction[15:11], 5'b11111, 5'b11100, RegisterDST, writeRegister);
 	Registers regs(instruction[25:21], instruction[20:16], writeRegister, writeData, ReadData1, ReadData2, regWrite, Clock);
 	sign_extend Se(instruction[15:0], sign32);
 	MUX32 mux32(ReadData2, sign32, ALUSrc, ALU_in);
 	ALUControl ulacontrol(ALU_Op, instruction[5:0], ALU_Control);
 	ULA alu(ALU_Control, ReadData1, ALU_in, zero, ALU_Out);
-	RAM single_port_RAM(ReadData2, ALU_Out[9:0], memWrite, Clock, CLK, Read_Data_Out);
+	
+	MUX32 mux32_2(ReadData2, savedLine, NextLineTBE, data);
+	
+	RAM single_port_RAM(data, ALU_Out[31:0], memWrite, Clock, CLK, Read_Data_Out, ProcessOffset);
+	
 	MUX432 mutiplex332_1(ALU_Out, Read_Data_Out, addressOut_ADD, user_input, memtoReg, writeData);
 	ShiftLeft2_32 SL32(sign32, sign_Out);
 	Add adder(addressOut_ADD, sign_Out, ALU_Add_Out);

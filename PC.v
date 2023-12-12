@@ -1,12 +1,21 @@
-module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addressOut, ContextChangeBack);
+module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addressOut, ContextChangeBack,NextLineTBE,savedLine);
 	input CLK, reset, input_flag, output_flag, insert;
 	input [31:0] addressIn;
 	input inProgram;
 	output reg [31:0] addressOut;
 	output reg ContextChangeBack;
+	input NextLineTBE;
 	
+	output reg [31:0] savedLine;
 	integer lastinsert = 0;
 	integer instcount = 0;
+	always@(CLK)
+	begin
+		if(NextLineTBE)begin
+			savedLine = addressIn + (10)*4;
+//			addressOut <= addressIn;
+		end
+	end 
 	
 	always@(posedge CLK or posedge reset)
 	begin
@@ -14,9 +23,14 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addres
 			instcount  <= 0;
 			addressOut <= 0;
 		end
+//		else if(NextLineTBE)begin
+//			savedLine = addressIn + (10)*4;
+//			addressOut <= addressIn;
+//		end
 		else if(!input_flag && !output_flag)begin
 			if (instcount > 10)begin
 				ContextChangeBack <= 1;
+				addressOut <= savedLine;
 				instcount  <= 0;
 			end
 			else begin
