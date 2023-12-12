@@ -28,10 +28,9 @@ module Processor
 	output ALUSrc,
 	output ContextChangeTo, ContextChangeBack, 
 	output inProgram,
-	output NextLineTBE,
-	output [11:0] ProcessOffset
+	output NextLineTBE,OffsetChange,
+	output [11:0] inRAMOffset
 	//output [3:0] instcount
-	
 );	
 	wire [31:0] Branch_Normal;
 	wire [31:0] addressOut_ADD;
@@ -45,7 +44,7 @@ module Processor
 	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, inProgram, addressOut, ContextChangeBack,NextLineTBE,savedLine);
 	PC_4 pc4(addressOut, addressOut_ADD);
 	single_port_rom rom(addressOut[13:2], instruction);
-	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite, memWrite, ALU_Op, halt, output_flag, input_flag,NextLineTBE);
+	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite, memWrite, ALU_Op, halt, output_flag, input_flag,NextLineTBE, OffsetChange);
 	MUX432 #(5) mx332(instruction[20:16], instruction[15:11], 5'b11111, 5'b11100, RegisterDST, writeRegister);
 	Registers regs(instruction[25:21], instruction[20:16], writeRegister, writeData, ReadData1, ReadData2, regWrite, Clock);
 	sign_extend Se(instruction[15:0], sign32);
@@ -55,8 +54,7 @@ module Processor
 	
 	MUX32 mux32_2(ReadData2, savedLine, NextLineTBE, data);
 	
-	RAM single_port_RAM(data, ALU_Out[31:0], memWrite, Clock, CLK, Read_Data_Out, ProcessOffset);
-	
+	RAM single_port_RAM(data, ALU_Out[31:0], memWrite, Clock, CLK, Read_Data_Out, ReadData1, OffsetChange, inRAMOffset);
 	MUX432 mutiplex332_1(ALU_Out, Read_Data_Out, addressOut_ADD, user_input, memtoReg, writeData);
 	ShiftLeft2_32 SL32(sign32, sign_Out);
 	Add adder(addressOut_ADD, sign_Out, ALU_Add_Out);
