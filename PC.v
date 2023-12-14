@@ -5,8 +5,8 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addres
 	output reg [31:0] addressOut;
 	output reg ContextChangeBack;
 	input NextLineTBE;
-	
 	output reg [31:0] savedLine;
+	
 	integer lastinsert = 0;
 	integer instcount = 0;
 	always@(CLK)
@@ -23,10 +23,6 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addres
 			instcount  <= 0;
 			addressOut <= 0;
 		end
-//		else if(NextLineTBE)begin
-//			savedLine = addressIn + (10)*4;
-//			addressOut <= addressIn;
-//		end
 		else if(!input_flag && !output_flag)begin
 			if (instcount > 10)begin
 				ContextChangeBack <= 1;

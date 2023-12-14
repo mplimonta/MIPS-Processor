@@ -4,12 +4,17 @@ module ULA
 	input [31:0] inA,
 	input [31:0] inB,
 	output zero,
-	output reg [31:0] result
+	output reg [31:0] result,
+	input changeROM
 );
 
-	always@(inA,inB,ALU_Control)
+	always@(inA,inB,ALU_Control,changeROM)
 	begin
-		if (ALU_Control == 4'b0000)      			//Div
+		if (changeROM)      			//Div
+		begin
+			result <= 0;
+		end
+		else if (ALU_Control == 4'b0000)      			//Div
 		begin
 			result <= inA/inB;
 		end

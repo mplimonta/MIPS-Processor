@@ -236,7 +236,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 		else if (Opcode == 6'b010000)		//changeROM
 		begin
 			RegisterDST <= 2'b00;
-			Jump <= 2'b00;
+			Jump <= 2'b11;
 			Branch <= 1'b0;
 			memtoReg <= 2'b00;
 			ALUSrc <= 1'b0;

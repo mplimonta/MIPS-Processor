@@ -32,6 +32,7 @@ module Processor
 	output [11:0] inRAMOffset
 	//output [3:0] instcount
 );	
+
 	wire [31:0] Branch_Normal;
 	wire [31:0] addressOut_ADD;
 	wire [31:0] sign32;
@@ -50,9 +51,11 @@ module Processor
 	sign_extend Se(instruction[15:0], sign32);
 	MUX32 mux32(ReadData2, sign32, ALUSrc, ALU_in);
 	ALUControl ulacontrol(ALU_Op, instruction[5:0], ALU_Control);
-	ULA alu(ALU_Control, ReadData1, ALU_in, zero, ALU_Out);
+	ULA alu(ALU_Control, ReadData1, ALU_in, zero, ALU_Out,changeROM);
 	
 	MUX32 mux32_2(ReadData2, savedLine, NextLineTBE, data);
+	
+	
 	
 	RAM single_port_RAM(data, ALU_Out[31:0], memWrite, Clock, CLK, Read_Data_Out, ReadData1, OffsetChange, inRAMOffset);
 	MUX432 mutiplex332_1(ALU_Out, Read_Data_Out, addressOut_ADD, user_input, memtoReg, writeData);
@@ -61,6 +64,6 @@ module Processor
 	and(BranchOut, Branch, ~zero);
 	MUX32 multiplex32(addressOut_ADD, ALU_Add_Out, BranchOut, Branch_Normal);
 	ShiftLeft2_26 SL26(instruction[25:0], addressOut_ADD[31:28], shift26_Out);
-	MUX332 mutiplex332_2(Branch_Normal, shift26_Out, ReadData1, Jump, addressIn);
+	MUX432 mutiplex432_2(Branch_Normal, shift26_Out, ReadData1, Read_Data_Out, Jump, addressIn);
 	IO InputOutput(Clock, reset, halt, ReadData1, output_flag, input_flag, SW, user_input, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7);
 endmodule
