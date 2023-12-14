@@ -12,7 +12,12 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addres
 	always@(CLK)
 	begin
 		if(NextLineTBE)begin
-			savedLine = addressIn + (10)*4;
+			if(inProgram)begin
+				savedLine = addressIn + 4;
+			end
+			else begin
+				savedLine = addressIn + (10)*4;
+			end
 //			addressOut <= addressIn;
 		end
 	end 

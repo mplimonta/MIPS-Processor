@@ -250,6 +250,23 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			OffsetChange <= 1'b0;
 			changeROM <= 1'b1;
 		end
+		else if (Opcode == 6'b010001)		//setProcessLine
+		begin
+			RegisterDST <= 2'b00;
+			Jump <= 2'b00;
+			Branch <= 1'b0;
+			memtoReg <= 2'b00;
+			ALUSrc <= 1'b0;
+			regWrite <= 1'b0;
+			memWrite <= 1'b0; 
+			Alu_op <= 3'b000;
+			halt <= 1'b0;
+			output_flag <= 1'b0;
+			input_flag <= 1'b0;
+			NextLineTBE <= 1'b0;
+			OffsetChange <= 1'b0;
+			changeROM <= 1'b0;
+		end
 		else if (Opcode == 6'b111111)		//HALT
 		begin
 			RegisterDST <= 2'b00;
