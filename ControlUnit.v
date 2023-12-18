@@ -3,7 +3,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 	output reg halt, output_flag, input_flag;
 	output reg [1:0] Jump;
 	output reg [1:0] RegisterDST;
-	output reg [1:0] memtoReg;
+	output reg [2:0] memtoReg;
 	output reg Branch,ALUSrc,regWrite,memWrite;
 	output reg [2:0] Alu_op;
 	output reg [1:0] NextLineTBE;
@@ -19,7 +19,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b01;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b1;
 			memWrite <= 1'b0; 
@@ -38,7 +38,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b01;
+			memtoReg <= 3'b001;
 			ALUSrc <= 1'b1;
 			regWrite <= 1'b1;
 			memWrite <= 1'b0; 
@@ -57,7 +57,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b1;
 			regWrite <= 1'b0;
 			memWrite <= 1'b1; 
@@ -76,7 +76,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b1;
 			regWrite <= 1'b1;
 			memWrite <= 1'b0; 
@@ -95,7 +95,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b1;
 			regWrite <= 1'b1;
 			memWrite <= 1'b0; 
@@ -114,7 +114,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b1;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
 			memWrite <= 1'b0; 
@@ -134,7 +134,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b01;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
 			memWrite <= 1'b0; 
@@ -153,7 +153,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b10;
 			Jump <= 2'b10;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
 			memWrite <= 1'b0; 
@@ -172,7 +172,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b10;
 			Jump <= 2'b01;
 			Branch <= 1'b0;
-			memtoReg <= 2'b10;
+			memtoReg <= 3'b010;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b1;
 			memWrite <= 1'b0; 
@@ -191,7 +191,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b11;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b11;
+			memtoReg <= 3'b011;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b1;
 			memWrite <= 1'b0; 
@@ -210,7 +210,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
 			memWrite <= 1'b0; 
@@ -229,7 +229,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
 			memWrite <= 1'b1; 
@@ -248,7 +248,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
 			memWrite <= 1'b0; 
@@ -267,7 +267,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
 			memWrite <= 1'b0; 
@@ -286,7 +286,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
 			memWrite <= 1'b1; 
@@ -299,12 +299,31 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			changeROM <= 1'b0;
 			EndOfProcess <= 1'b0;
 		end
+		else if (Opcode == 6'b010010)		//ProcessCheck
+		begin
+			RegisterDST <= 2'b11;
+			Jump <= 2'b00;
+			Branch <= 1'b0;
+			memtoReg <= 3'b100;
+			ALUSrc <= 1'b0;
+			regWrite <= 1'b1;
+			memWrite <= 1'b0; 
+			Alu_op <= 3'b000;
+			halt <= 1'b0;
+			output_flag <= 1'b0;
+			input_flag <= 1'b0;
+			NextLineTBE <= 2'b00;
+			OffsetChange <= 1'b0;
+			changeROM <= 1'b0;
+			setProcessLine <= 1'b0;
+			EndOfProcess <= 1'b0;
+		end
 		else if (Opcode == 6'b111111)		//HALT
 		begin
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
 			memWrite <= 1'b0; 
@@ -320,12 +339,12 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 		end
 		else if (Opcode == 6'b111110)		//EndProcess
 		begin
-			RegisterDST <= 2'b11;
+			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b11;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
-			regWrite <= 1'b1;
+			regWrite <= 1'b0;
 			memWrite <= 1'b0; 
 			Alu_op <= 3'b000;
 			halt <= 1'b0;
@@ -342,7 +361,7 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 			RegisterDST <= 2'b00;
 			Jump <= 2'b00;
 			Branch <= 1'b0;
-			memtoReg <= 2'b00;
+			memtoReg <= 3'b000;
 			ALUSrc <= 1'b0;
 			regWrite <= 1'b0;
 			memWrite <= 1'b0; 

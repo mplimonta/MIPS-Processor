@@ -37,6 +37,7 @@ module Processor
 	output CurrentProcessState
 	
 );
+
 //	wire [31:0] addressOut_ADD;
 	wire [31:0] sign32;
 	wire [31:0] ALU_in;
@@ -63,7 +64,7 @@ module Processor
 	MUX332 mux332_2(ReadData2, savedLine, ReadData1, NextLineTBE, data);
 	
 	RAM single_port_RAM(data, ALU_Out[31:0], memWrite, Clock, CLK, Read_Data_Out, ReadData1, OffsetChange, inRAMOffset, inProgram);
-	MUX432 mutiplex332_1(ALU_Out, Read_Data_Out, addressOut_ADD, user_input, memtoReg, writeData);
+	MUX532 mutiplex532_1(ALU_Out, Read_Data_Out, addressOut_ADD, user_input, CurrentProcessState, memtoReg, writeData);
 	ShiftLeft2_32 SL32(sign32, sign_Out);
 	Add adder(addressOut_ADD, sign_Out, ALU_Add_Out);
 	and(BranchOut, Branch, ~zero);
