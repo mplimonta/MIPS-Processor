@@ -5,12 +5,13 @@ module ULA
 	input [31:0] inB,
 	output zero,
 	output reg [31:0] result,
-	input changeROM
+	input changeROM, 
+	input [1:0] NextLineTBE
 );
 
-	always@(inA,inB,ALU_Control,changeROM)
+	always@(inA,inB,ALU_Control,changeROM, NextLineTBE)
 	begin
-		if (changeROM)      			//Div
+		if (changeROM || NextLineTBE == 2'b10)      			//Div
 		begin
 			result <= 0;
 		end

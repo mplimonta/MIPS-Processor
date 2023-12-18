@@ -1,24 +1,24 @@
-module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addressOut, ContextChangeBack,NextLineTBE,savedLine);
+module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addressOut, ContextChangeBack,NextLineTBE,savedLine, changeROM, Read_Data_Out,EndProcess);
+	
 	input CLK, reset, input_flag, output_flag, insert;
 	input [31:0] addressIn;
 	input inProgram;
 	output reg [31:0] addressOut;
 	output reg ContextChangeBack;
-	input NextLineTBE;
+	input [1:0] NextLineTBE;
 	output reg [31:0] savedLine;
+	input changeROM;
+	input [31:0] Read_Data_Out;
 	
 	integer lastinsert = 0;
 	integer instcount = 0;
-	always@(CLK)
+	reg [31:0] nextSoInst;
+	input EndProcess;
+	
+	always@(negedge CLK)
 	begin
-		if(NextLineTBE)begin
-			if(inProgram)begin
-				savedLine = addressIn + 4;
-			end
-			else begin
-				savedLine = addressIn + (10)*4;
-			end
-//			addressOut <= addressIn;
+		if(inProgram)begin
+			savedLine = addressIn;
 		end
 	end 
 	
@@ -29,9 +29,9 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addres
 			addressOut <= 0;
 		end
 		else if(!input_flag && !output_flag)begin
-			if (instcount > 10)begin
+			if (instcount > 10 + 32 || EndProcess)begin
 				ContextChangeBack <= 1;
-				addressOut <= savedLine;
+				addressOut <= nextSoInst;
 				instcount  <= 0;
 			end
 			else begin
@@ -40,6 +40,10 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addres
 				addressOut <= addressIn;
 				if (!inProgram)begin
 					instcount <= 0;
+				end
+				if(changeROM)begin
+					nextSoInst <= addressIn;
+					addressOut <= Read_Data_Out;
 				end
 			end
 		end

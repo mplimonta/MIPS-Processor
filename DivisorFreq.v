@@ -8,7 +8,7 @@ module DivisorFreq
 initial begin
 	reg1Hz <= 1;
 	if(setFreq)	freq <= 1;//250000
-	else freq <= 25000000;//2500
+	else freq <= 2500;//2500
 end
 
 integer count = 0;
@@ -19,7 +19,7 @@ always @(negedge clk)  begin
 //		reg1Hz<= 0;
 //	end
 	if(setFreq)	freq <= 1;//250000
-	else freq <= 25000000;//2500
+	else freq <= 2500;//2500
 	if(reset) begin
 		count <= 0;
 		reg1Hz <= 0;
