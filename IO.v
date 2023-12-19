@@ -4,10 +4,12 @@ module IO (
 	input output_flag, input_flag,
 	input [14:0] SW,
 	output [31:0] user_input,
-	output reg [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7
+	output reg [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7,
+	input [11:0] inRAMOffset
 );
 integer loading = 0;
 integer state = 7'b1110111;
+integer processo;
 //initial begin
 //	HEX0 = 7'b1111111;
 //	HEX1 = 7'b1111111;
@@ -45,7 +47,7 @@ integer state = 7'b1110111;
   
   always @ (posedge clk or posedge reset or posedge halt)
   begin
-  
+	processo = inRAMOffset/288;
 	if(reset) 
 	begin
 		HEX0 <= 7'b1111111;
@@ -54,8 +56,8 @@ integer state = 7'b1110111;
 		HEX3 <= 7'b1111111;
 		HEX4 <= 7'b1111111;
 		HEX5 <= 7'b1111111;
-		HEX6 <= 7'b1111111;
-		HEX7 <= 7'b1111111;
+		set_7seg(processo, HEX6);
+		HEX7 <= 7'b0001100;
 	end
 	else if(halt)
 	begin
@@ -76,8 +78,8 @@ integer state = 7'b1110111;
 		set_7seg((num%10000)/1000, HEX3);
 		set_7seg((num%100000)/10000, HEX4);
 		set_7seg((num%1000000)/100000, HEX5);
-		set_7seg((num%10000000)/1000000, HEX6);
-		set_7seg((num%100000000)/10000000, HEX7);
+		set_7seg(processo, HEX6);
+		HEX7 <= 7'b0001100;
 	end
 	else if(!output_flag && input_flag)
 	begin
@@ -89,8 +91,8 @@ integer state = 7'b1110111;
 			HEX3 <= 7'b0111111;
 			HEX4 <= 7'b0111111;
 			HEX5 <= 7'b0111111;
-			HEX6 <= 7'b0111111;
-			HEX7 <= 7'b0111111;
+			set_7seg(processo, HEX6);
+		HEX7 <= 7'b0001100;
 		end
 		else
 		begin
@@ -100,8 +102,8 @@ integer state = 7'b1110111;
 			set_7seg((user_input%10000)/1000, HEX3);
 			set_7seg((user_input%100000)/10000, HEX4);
 			set_7seg((user_input%1000000)/100000, HEX5);
-			set_7seg((user_input%10000000)/1000000, HEX6);
-			set_7seg((user_input%100000000)/10000000, HEX7);
+			set_7seg(processo, HEX6);
+			HEX7 <= 7'b0001100;
 		end
 	end
 	else
@@ -112,8 +114,8 @@ integer state = 7'b1110111;
 			HEX3 <= state;
 			HEX4 <= state;
 			HEX5 <= state;
-			HEX6 <= state;
-			HEX7 <= state;
+			set_7seg(processo, HEX6);
+			HEX7 <= 7'b0001100;
 			loading <= loading + 1;
 			if(loading == 0) begin
 				state <= 7'b1110111;

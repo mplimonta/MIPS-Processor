@@ -38,6 +38,11 @@ module Processor
 	
 );
 
+
+
+
+
+
 //	wire [31:0] addressOut_ADD;
 	wire [31:0] sign32;
 	wire [31:0] ALU_in;
@@ -49,12 +54,14 @@ module Processor
 	wire [31:0] Branch_Normal;
 	wire [31:0] writeData;
 	
-	
 	DivisorFreq DF(CLK, reset, setFreq, Clock, halt);
 	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, inProgram, addressOut, ContextChangeBack,NextLineTBE,savedLine, changeROM, Read_Data_Out, EndOfProcess);
 	PC_4 pc4(addressOut, addressOut_ADD);
 	single_port_rom rom(addressOut[13:2], instruction);
-	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite, memWrite, ALU_Op, halt, output_flag, input_flag,NextLineTBE, OffsetChange, changeROM, setProcessLine, EndOfProcess);
+	
+	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite,
+	memWrite, ALU_Op, halt, output_flag, input_flag,NextLineTBE, OffsetChange, changeROM ,setProcessLine, EndOfProcess);
+	
 	MUX432 #(5) mx332(instruction[20:16], instruction[15:11], 5'b11111, 5'b11100, RegisterDST, writeRegister);
 	Registers regs(instruction[25:21], instruction[20:16], writeRegister, writeData, ReadData1, ReadData2, regWrite, Clock);
 	sign_extend Se(instruction[15:0], sign32);
@@ -74,5 +81,5 @@ module Processor
 	SetJumpOffset SJO(Clock, ReadData2,OffsetChange, NewJumpADDR, shift26_Out, JumpOffset);
 	MUX332 mutiplex432_2(Branch_Normal, NewJumpADDR, ReadData1, Jump, addressIn);
 	SetProcessState SPS(Clock,CurrentProcessState, changeROM, EndOfProcess);
-	IO InputOutput(Clock, reset, halt, ReadData1, output_flag, input_flag, SW, user_input, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7);
+	IO InputOutput(Clock, reset, halt, ReadData1, output_flag, input_flag, SW, user_input, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7,inRAMOffset);
 endmodule

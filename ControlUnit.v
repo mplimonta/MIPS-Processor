@@ -1,4 +1,7 @@
-module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWrite,Alu_op,halt, output_flag, input_flag, NextLineTBE, OffsetChange, changeROM,inProgram, setProcessLine, EndOfProcess);
+module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,
+memWrite,Alu_op,halt, output_flag, input_flag, NextLineTBE, OffsetChange,
+ changeROM, setProcessLine, EndOfProcess);
+ 
 	input [5:0] Opcode;
 	output reg halt, output_flag, input_flag;
 	output reg [1:0] Jump;
@@ -9,7 +12,6 @@ module ControlUnit(Opcode,RegisterDST,Jump,Branch,memtoReg,ALUSrc,regWrite,memWr
 	output reg [1:0] NextLineTBE;
 	output reg OffsetChange;
 	output reg changeROM;
-	output reg inProgram;
 	output reg setProcessLine;
 	output reg EndOfProcess;
 	always@(*) 
