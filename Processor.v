@@ -11,7 +11,7 @@ module Processor
 	output [3:0] ALU_Control,
 	output [2:0] ALU_Op,
 	output zero, BranchOut, halt, output_flag, input_flag, 
-	output [31:0] savedLine,
+	output [31:0] writeData,
 	output [31:0] Read_Data_Out,
 	output [1:0] Jump, RegisterDST, memtoReg,
 	output Branch,regWrite,memWrite,
@@ -24,7 +24,6 @@ module Processor
 	output [31:0] ALU_Add_Out,
 	output [31:0] NewJumpADDR,
 	output [31:0] JumpOffset,
-	output [31:0] shift26_Out,
 	output [6:0] HEX0,
 	output [6:0] HEX1,
 	output [6:0] HEX2,
@@ -34,12 +33,11 @@ module Processor
 	output [6:0] HEX6,
 	output [6:0] HEX7,
 	output EndOfProcess,
-	output CurrentProcessState
+	output ProcessCheck,
+	output setQuantum,
+	output [31:0] quantumAdd
 	
 );
-
-
-
 
 
 
@@ -52,18 +50,21 @@ module Processor
 	wire [31:0] user_input;
 	wire [31:0] addressOut_ADD;
 	wire [31:0] Branch_Normal;
-	wire [31:0] writeData;
+	wire [31:0] shift26_Out;
+	wire [31:0] savedLine;
+	wire [31:0] CurrentProcessState;
 	
 	DivisorFreq DF(CLK, reset, setFreq, Clock, halt);
-	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, inProgram, addressOut, ContextChangeBack,NextLineTBE,savedLine, changeROM, Read_Data_Out, EndOfProcess);
+	PC pc(Clock, reset, input_flag, output_flag, insert, addressIn, inProgram, addressOut,
+	ContextChangeBack,NextLineTBE,savedLine, changeROM, Read_Data_Out, EndOfProcess, setQuantum, ReadData1, quantumAdd);
 	PC_4 pc4(addressOut, addressOut_ADD);
 	single_port_rom rom(addressOut[13:2], instruction);
 	
 	ControlUnit UC(instruction[31:26], RegisterDST, Jump, Branch, memtoReg, ALUSrc, regWrite,
-	memWrite, ALU_Op, halt, output_flag, input_flag,NextLineTBE, OffsetChange, changeROM ,setProcessLine, EndOfProcess);
+	memWrite, ALU_Op, halt, output_flag, input_flag,NextLineTBE, OffsetChange, changeROM ,setProcessLine, EndOfProcess, ProcessCheck,setQuantum);
 	
 	MUX432 #(5) mx332(instruction[20:16], instruction[15:11], 5'b11111, 5'b11100, RegisterDST, writeRegister);
-	Registers regs(instruction[25:21], instruction[20:16], writeRegister, writeData, ReadData1, ReadData2, regWrite, Clock);
+	Registers regs(instruction[25:21], instruction[20:16], writeRegister, writeData, ReadData1, ReadData2, regWrite, Clock, ProcessCheck, CurrentProcessState);
 	sign_extend Se(instruction[15:0], sign32);
 	MUX32 mux32(ReadData2, sign32, ALUSrc, ALU_in);
 	ALUControl ulacontrol(ALU_Op, instruction[5:0], ALU_Control);
@@ -71,7 +72,7 @@ module Processor
 	MUX332 mux332_2(ReadData2, savedLine, ReadData1, NextLineTBE, data);
 	
 	RAM single_port_RAM(data, ALU_Out[31:0], memWrite, Clock, CLK, Read_Data_Out, ReadData1, OffsetChange, inRAMOffset, inProgram);
-	MUX532 mutiplex532_1(ALU_Out, Read_Data_Out, addressOut_ADD, user_input, CurrentProcessState, memtoReg, writeData);
+	MUX432 mutiplex432_1(ALU_Out, Read_Data_Out, addressOut_ADD, user_input, memtoReg, writeData);
 	ShiftLeft2_32 SL32(sign32, sign_Out);
 	Add adder(addressOut_ADD, sign_Out, ALU_Add_Out);
 	and(BranchOut, Branch, ~zero);

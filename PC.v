@@ -1,4 +1,6 @@
-module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addressOut, ContextChangeBack,NextLineTBE,savedLine, changeROM, Read_Data_Out,EndProcess);
+module PC(CLK,reset,input_flag, output_flag, insert,
+addressIn, inProgram,addressOut, ContextChangeBack,
+NextLineTBE,savedLine, changeROM, Read_Data_Out, EndProcess, setQuantum, ReadData1, quantumAdd);
 	
 	input CLK, reset, input_flag, output_flag, insert;
 	input [31:0] addressIn;
@@ -14,14 +16,21 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addres
 	integer instcount = 0;
 	reg [31:0] nextSoInst;
 	input EndProcess;
+	input setQuantum;
+	input [31:0] ReadData1;
+	output reg [31:0] quantumAdd;
+
+
 	
 	always@(negedge CLK)
 	begin
 		if(inProgram)begin
 			savedLine = addressIn;
 		end
+		if(setQuantum)begin
+			quantumAdd <= ReadData1;
+		end
 	end 
-	
 	always@(posedge CLK or posedge reset)
 	begin
 		if (reset) begin
@@ -29,7 +38,7 @@ module PC(CLK,reset,input_flag, output_flag, insert, addressIn, inProgram,addres
 			addressOut <= 0;
 		end
 		else if(!input_flag && !output_flag)begin
-			if (instcount > 10 + 32 || EndProcess)begin
+			if (instcount > 50 + 32 + quantumAdd || EndProcess)begin
 				ContextChangeBack <= 1;
 				addressOut <= nextSoInst;
 				instcount  <= 0;

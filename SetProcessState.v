@@ -1,8 +1,8 @@
-module SetProcessState(CLK,CurrentProcessState, changeROM, EOfProcess);
+module SetProcessState(CLK,CurrentProcessState, changeROM, EndOfProcess);
 	input CLK;
-	output reg CurrentProcessState;
+	output reg [31:0] CurrentProcessState;
 	input changeROM;
-	input EOfProcess;
+	input EndOfProcess;
 	
 	initial begin
 		CurrentProcessState = 1;
@@ -12,7 +12,7 @@ module SetProcessState(CLK,CurrentProcessState, changeROM, EOfProcess);
 		if(changeROM)begin
 			CurrentProcessState <= 1;
 		end
-		if(EOfProcess)begin
+		if(EndOfProcess)begin
 			CurrentProcessState <= 0;
 		end
 	end
