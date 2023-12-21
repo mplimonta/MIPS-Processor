@@ -1,36 +1,39 @@
-Quartus Prime Archive log --	C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/MIPS.qarlog
+Quartus Prime Archive log --	E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/MIPS.qarlog
 
-Archive:	C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/MIPS.qar
-Date:		Mon Jul 10 21:35:39 2023
+Archive:	E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/MIPS.qar
+Date:		Thu Dec 21 19:39:24 2023
 Quartus Prime		20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 	=========== Files Selected: ===========
-C:/Users/mathe/Desktop/Chain1.cdf
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/ALUControl.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/Add.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/ControlUnit.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/DivisorFreq.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/IO.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/MIPS.qpf
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/MIPS.qsf
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/MUX32.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/MUX332.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/MUX432.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/MUX5.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/PC.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/PC_4.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/Processor.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/RAM.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/ROM.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/Registers.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/ShiftLeft2_26.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/ShiftLeft2_32.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/ULA.v
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/Waveform.vwf
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/assignment_defaults.qdf
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/rom.txt
-C:/Users/mathe/Desktop/gitMIPS/MIPS-Processor/sign_extend.v
-	======= Total: 25 files to archive =======
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/ALUControl.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/Add.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/ControlUnit.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/DivisorFreq.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/IO.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/MIPS.qpf
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/MIPS.qsf
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/MUX32.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/MUX332.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/MUX432.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/MUX5.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/MUX532.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/PC.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/PC_4.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/Processor.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/RAM.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/ROM.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/Registers.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/SetJumpOffset.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/SetProcessState.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/ShiftLeft2_26.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/ShiftLeft2_32.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/ULA.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/Waveform3.vwf
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/assignment_defaults.qdf
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/rom.txt
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/sign_extend.v
+E:/___________COISA DE FACUL__________/Lab de Comp/MIPS-Processor/single_port_rom.v
+	======= Total: 28 files to archive =======
 
 	================ Status: ===============
 All files archived successfully.
